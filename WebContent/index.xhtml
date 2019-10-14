@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+<title>Product Faces</title>
+</h:head>
+<h:body>
+
+	<h:form id="myForm" >
+	 <!-- <h:selectBooleanCheckbox id="myCheckbox" onclick="hideOrShow(this.checked);"/> -->
+	  
+	<h:selectBooleanCheckbox id="myCheckbox" binding="#{showUserInfo}">
+                <f:ajax render="myPanel" />
+    </h:selectBooleanCheckbox>
+    
+    <h:panelGrid id="myPanel" columns="3" layout="block">
+    <ui:fragment style="display:none"  rendered="#{not empty showUserInfo.value and showUserInfo.value}">
+       	
+		<h:outputLabel for="txtName">
+			<h:outputText value="Enter Product Name "/>
+		</h:outputLabel>
+		
+		<h:inputText id="txtName" value="#{prodObj.name}" />
+		
+		<br/>
+		
+		<h:outputLabel for="txtQty">
+			<h:outputText value="Enter Product Qty "/>
+		</h:outputLabel>
+		
+		<h:inputText id="txtQty" value="#{prodObj.qty}" />
+		
+		<br/>
+		
+		<h:outputLabel for="txtPrice">
+			<h:outputText value="Enter Product Price "/>
+		</h:outputLabel>
+		
+		<h:inputText id="txtPrice" value="#{prodObj.price}" />
+		
+		<br/>
+		<h:commandButton id="button" value="Add Item" action="#{prodObj.add}"/>
+</ui:fragment>		
+	</h:panelGrid>
+	</h:form>
+	
+<script type="text/javascript">
+    function hideOrShow(show) {
+        // Get the panel using its ID
+        var obj = document.getElementById("myForm:myPanel");
+        if (show) {
+            obj.style.display = "block";
+        } else {
+            obj.style.display = "none";
+        }
+    }
+</script>
+	
+</h:body>
+</html>
